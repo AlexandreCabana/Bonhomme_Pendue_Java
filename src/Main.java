@@ -41,13 +41,11 @@ public class Main {
                 if (wordguest.equals(mot)){
                     System.out.println("Bravo! Vous avez deviné le mot en "+nd+" essaies. Le mot était "+ mot);
                     System.exit(1);
-
                 }
             }
             else{
                 System.out.println("Wrong Guest");
             }
-
         }
     }
 }
