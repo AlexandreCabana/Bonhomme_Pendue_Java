@@ -1,32 +1,44 @@
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+
 public class Main {
+
+    public static final int MAXGUESS = 8;
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String word = "banane";
+        String word = GetWord("C:\\Users\\6313326\\IdeaProjects\\Bonhomme_Pendue\\liste_francais.txt");
         String wordguest = GenerateHiddenWord(word.length());
         int numberofguess = 0;
-        int maxguess = 4;
-        while (numberofguess < maxguess) {
-            System.out.println("Le mot actuel est: "+wordguest);
+        while (numberofguess < MAXGUESS) {
+            System.out.println("Le mot actuel est: "+ wordguest);
             String userinput = AskUserWord(scanner);
             if (PlayerWin(word,userinput)) {
-                Victory(numberofguess, maxguess, word);
+                Victory(numberofguess, MAXGUESS, word);
                 break;
             }
             else if (word.contains(userinput)) {
                 wordguest = AddLetterToHiddenWord(word, userinput, wordguest);
                 if (PlayerWin(word, wordguest)){
-                    Victory(numberofguess, maxguess, word);
+                    Victory(numberofguess, MAXGUESS, word);
                     System.exit(1);
                 }
                 else {
-                    numberofguess = WrongGuess(numberofguess, maxguess);
+                    numberofguess = GoodGuess(numberofguess, MAXGUESS);
                 }
             }
             else{
-                numberofguess = WrongGuess(numberofguess, maxguess);
+                numberofguess = WrongGuess(numberofguess, MAXGUESS);
             }
         }
+        System.out.println("Vous avez perdu. Le mot était "+ word);
     }
     public static String AskUserWord(Scanner scanner){
         System.out.println("Entre la lettre choisi ou le mot final");
@@ -60,7 +72,43 @@ public class Main {
     }
     public static int WrongGuess(int guesscount, int guessmaxtry){
         guesscount++;
+        System.out.println("La lettre que vous avez choisis n'est pas dans le mot secret. Vous êtes à " + guesscount +" essaies sur "+ guessmaxtry + ".");
+        return guesscount;
+    }
+    public static int GoodGuess(int guesscount, int guessmaxtry){
         System.out.println("La lettre que vous avez choisis est dans le mot secret. Vous êtes à " + guesscount +" essaies sur "+ guessmaxtry + ".");
         return guesscount;
+    }
+    public static String GetWord(String filename) {
+        List<String> wordlist = GetWordList(filename);
+        Random rand = new Random();
+        return wordlist.get(rand.nextInt(wordlist.size()));
+    }
+
+    private static List<String>GetWordList(String filename){
+        List<String> list = new ArrayList<String>();
+        File file = new File(filename);
+        BufferedReader reader = null;
+
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            String text = null;
+
+            while ((text = reader.readLine()) != null) {
+                list.add(text);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+            }
+        }
+        return list;
     }
 }
