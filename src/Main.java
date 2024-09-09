@@ -14,6 +14,7 @@ public class Main {
         String wordguest = GenerateHiddenWord(word.length());
         int numberofguess = 0;
         while (numberofguess < MAXGUESS) {
+            DrawHangMen(numberofguess);
             System.out.println("Le mot actuel est: "+ wordguest);
             String userinput = AskUserWord(scanner);
             if (PlayerWin(word,userinput)) {
@@ -34,7 +35,9 @@ public class Main {
                 numberofguess = WrongGuess(numberofguess, MAXGUESS);
             }
         }
-        System.out.println("Vous avez perdu. Le mot était "+ word);
+        if (numberofguess == MAXGUESS) {
+            System.out.println("Vous avez perdu. Le mot était " + word);
+        }
     }
     public static String AskUserWord(Scanner scanner){
         System.out.println("Entre la lettre choisi ou le mot final");
@@ -107,4 +110,72 @@ public class Main {
         }
         return list;
     }
+    public static void DrawHangMen(int numbefOfGuess){
+        if (numbefOfGuess==6){
+            System.out.println("  ------");
+            System.out.println("  |    |");
+            System.out.println("  O    |");
+            System.out.println(" /|\\   |");
+            System.out.println(" / \\   |");
+            System.out.println("       |");
+            System.out.println("--------- ");
+        }
+        else if (numbefOfGuess==5){
+            System.out.println("  ------");
+            System.out.println("  |    |");
+            System.out.println("  O    |");
+            System.out.println(" /|\\   |");
+            System.out.println(" /      |");
+            System.out.println("       |");
+            System.out.println("--------- ");
+        }
+        else if (numbefOfGuess==4){
+            System.out.println("  ------");
+            System.out.println("  |    |");
+            System.out.println("  O    |");
+            System.out.println(" /|\\   |");
+            System.out.println("        |");
+            System.out.println("       |");
+            System.out.println("--------- ");
+        }
+        else if (numbefOfGuess==3){
+            System.out.println("  ------");
+            System.out.println("  |    |");
+            System.out.println("  O    |");
+            System.out.println(" /|    |");
+            System.out.println("       |");
+            System.out.println("       |");
+            System.out.println("--------- ");
+        }
+        else if (numbefOfGuess==2){
+            System.out.println("  ------");
+            System.out.println("  |    |");
+            System.out.println("  O    |");
+            System.out.println("  |    |");
+            System.out.println("       |");
+            System.out.println("       |");
+            System.out.println("--------- ");
+        }
+        else if (numbefOfGuess==1){
+            System.out.println("  ------");
+            System.out.println("  |    |");
+            System.out.println("  O    |");
+            System.out.println("       |");
+            System.out.println("       |");
+            System.out.println("       |");
+            System.out.println("--------- ");
+        }
+        else if (numbefOfGuess==0) {
+            System.out.println("  ------");
+            System.out.println("  |    |");
+            System.out.println("       |");
+            System.out.println("       |");
+            System.out.println("       |");
+            System.out.println("       |");
+            System.out.println("--------- ");
+        }
+    }
 }
+/*
+    <h1>salut</h1>
+ */
