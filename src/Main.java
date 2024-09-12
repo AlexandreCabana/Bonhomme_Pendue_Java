@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String word = GetWord("C:\\Users\\6313326\\IdeaProjects\\Bonhomme_Pendue\\liste_francais.txt");
+        String word = GetWord("liste_francais.txt");
         String wordguest = GenerateHiddenWord(word.length());
         int numberofguess = 0;
         while (numberofguess < MAXGUESS) {
