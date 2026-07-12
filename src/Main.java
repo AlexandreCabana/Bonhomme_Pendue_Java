@@ -36,6 +36,7 @@ public class Main {
             }
         }
         if (numberofguess == MAXGUESS) {
+            DrawHangMen(6);
             System.out.println("Vous avez perdu. Le mot était " + word);
         }
     }
